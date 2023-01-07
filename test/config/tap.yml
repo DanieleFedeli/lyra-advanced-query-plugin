@@ -1,0 +1,8 @@
+---
+jobs-auto: true
+timeout: 60
+reporter: min
+coverage: false
+ts: true
+node-arg:
+  - --require=tsconfig-paths/register
