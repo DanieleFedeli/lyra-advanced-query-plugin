@@ -1,5 +1,7 @@
-# Lyra's advanced query plugin
+[![codecov](https://codecov.io/gh/DanieleFedeli/lyra-advanced-query-plugin/branch/main/graph/badge.svg?token=BAGG76Q4YQ)](https://codecov.io/gh/DanieleFedeli/lyra-advanced-query-plugin) [![Test CI](https://github.com/DanieleFedeli/lyra-advanced-query-plugin/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/DanieleFedeli/lyra-advanced-query-plugin/actions/workflows/test.yml) [![Lint CI](https://github.com/DanieleFedeli/lyra-advanced-query-plugin/actions/workflows/lint.yml/badge.svg)](https://github.com/DanieleFedeli/lyra-advanced-query-plugin/actions/workflows/lint.yml)
 
+
+# Lyra's advanced query plugin
 This package is a plugin (experimental) for [Lyra](https://lyrajs.io/) that aims to enhance lyra retrieval possibility.
 
 ## Usage 
