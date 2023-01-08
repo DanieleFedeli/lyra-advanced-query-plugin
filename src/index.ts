@@ -1,7 +1,6 @@
 import { Lyra, PropertiesSchema, search } from "@lyrasearch/lyra";
 import { QueueNode } from "./sorted-queue";
 import { AdvancedParams, BooleanIndex, NumberComparison, NumericIndex, WhereParams } from "./types";
-import { binarySearch } from "./utils/binary-search";
 import { setIntersection } from "./utils/set";
 
 export const numericIndex: NumericIndex = new Map();
@@ -32,13 +31,12 @@ export function advancedSearch<S extends PropertiesSchema>(lyra: Lyra<S>, params
         const numericKey = rawIndex.slice(0, -2).join(".");
         const operator = rawIndex[rawIndex.length - 2] as keyof NumberComparison;
         const valueSearched = Number(rawIndex[rawIndex.length - 1]);
-
         if (!numericIndex.has(numericKey)) continue;
 
         const current = numericIndex.get(numericKey)!;
-        const nodeIndex = binarySearch(current.queue, element => element.priority - valueSearched);
+        const nodeIndex = current.search(valueSearched);
         if (nodeIndex === -1) continue;
-
+    
         const node = current.queue[nodeIndex];
         if (operator === '=') node.payload.forEach(v => retrievedNumeric.add(v));
         else {
@@ -53,7 +51,6 @@ export function advancedSearch<S extends PropertiesSchema>(lyra: Lyra<S>, params
     }
 
     const retrievedDoc = setIntersection(retrievedBoolean, retrievedNumeric)  
-
     const finalResult: ReturnType<typeof search> = {
         elapsed: BigInt(0),
         hits: [],
@@ -102,15 +99,14 @@ function getUsedIndexes<S extends PropertiesSchema>(lyra: Lyra<S>, schema: S, wh
     for (const key of Object.keys(where)) {
         const propName = `${prefix}${String(key)}`
         const propValue = (where as any)[key];
-        if (lyra.schema[key] === 'boolean') usedBooleanIndex.push(_handleBoolean(propValue, propName));
-        else if (lyra.schema[key] === 'number') usedNumericIndex.push(_handleNumber(propValue, propName));
-        else if (lyra.schema[key] === 'string') continue;
+        if (schema[key] === 'boolean') usedBooleanIndex.push(_handleBoolean(propValue, propName));
+        else if (schema[key] === 'number') usedNumericIndex.push(_handleNumber(propValue, propName));
+        else if (schema[key] === 'string') continue;
         else {
             const result = getUsedIndexes(lyra, schema[key] as S, propValue, `${propName}.`)
             usedBooleanIndex.push(...result.usedBooleanIndex);
             usedNumericIndex.push(...result.usedNumericIndex);
         }
-
     }
 
     return { usedBooleanIndex, usedNumericIndex }
@@ -123,7 +119,6 @@ function _handleBoolean(propValue: boolean, propName: string) {
 }
 
 function _handleNumber(propValue: NumberComparison, propName: string) {
-
     const numericKeys = Object.keys(propValue);
     if (numericKeys.length > 1) throw new Error('Only one numeric comparison is supported.');
 
