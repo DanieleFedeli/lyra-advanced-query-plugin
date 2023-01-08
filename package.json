@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "lint": "eslint . --fix",
     "format": "prettier --write **/*.{ts,md}",
-    "test": "c8 tap --rcfile=test/config/tap.yml test/**/*.test.ts "
+    "test": "c8 --reporter=text-lcov tap --rcfile=test/config/tap.yml test/**/*.test.ts "
   },
   "keywords": [
     "Lyra",
