@@ -4,10 +4,15 @@
   "description": "Lyra plugin to enable advanced query",
   "main": "dist/index.js",
   "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint",
+    "format": "prettier --write **/*.{ts,md}",
     "test": "c8 tap --rcfile=test/config/tap.yml test/**/*.test.ts "
   },
   "keywords": [
-    "Lyra"
+    "Lyra", 
+    "query",
+    "Lyra query"
   ],
   "author": "Daniele Fedeli",
   "license": "ISC",
@@ -23,5 +28,9 @@
   },
   "dependencies": {
     "@lyrasearch/lyra": "^0.3.1"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.{js,md,ts}": "prettier --write **/*.{ts,md}" 
   }
 }

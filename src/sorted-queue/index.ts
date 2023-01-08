@@ -1,2 +1,2 @@
 export * from './node';
-export * from './sorted-queue'
+export * from './sorted-queue';
