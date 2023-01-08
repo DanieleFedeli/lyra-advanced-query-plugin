@@ -1,7 +1,4 @@
-export function setIntersection<T = unknown>(
-  a: Set<T>,
-  b: Set<T>
-): Set<T> {
+export function setIntersection<T = unknown>(a: Set<T>, b: Set<T>): Set<T> {
   if (!a.size) return b;
   if (!b.size) return a;
 
