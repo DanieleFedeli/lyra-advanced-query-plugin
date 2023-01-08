@@ -1,11 +1,12 @@
 import { PropertiesSchema, SearchParams } from '@lyrasearch/lyra';
-import { allowedNumericComparison } from '..';
+
+import { allowedNumericComparison } from '../search';
 import { SortedQueue } from '../sorted-queue';
 
 export type NumericIndex = Map<string, SortedQueue<Set<string>>>;
 export type BooleanIndex = Map<string, Set<string>>;
 
-export type SupportedComparisons = (typeof allowedNumericComparison)[number];
+export type SupportedComparisons = typeof allowedNumericComparison[number];
 
 export type NumberComparison = {
   [P in SupportedComparisons]?: number;

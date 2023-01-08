@@ -1,5 +1,5 @@
+import { binarySearch } from 'src/utils/binary-search';
 import t from 'tap';
-import { binarySearch } from '../src/utils/binary-search';
 
 t.test('binary search', (t) => {
   t.test('If array is empty should return -1', (t) => {

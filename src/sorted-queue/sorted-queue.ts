@@ -1,4 +1,5 @@
-import { binarySearch } from 'src/utils/binary-search';
+import { binarySearch } from '../utils/binary-search';
+
 import { QueueNode } from './node';
 
 class SortedQueue<TPaylod> {

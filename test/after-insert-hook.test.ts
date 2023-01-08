@@ -1,6 +1,6 @@
 import { create, insertWithHooks } from '@lyrasearch/lyra';
-import { booleanIndex, numericIndex } from 'src';
 import { afterInsertAdvancedQuery } from 'src/hooks/after-insert';
+import { booleanIndex, numericIndex } from 'src/indexing';
 import t from 'tap';
 
 t.test('After insert hook', (t) => {

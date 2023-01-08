@@ -1,4 +1,5 @@
 import lyra, { insertWithHooks } from '@lyrasearch/lyra';
+
 import { afterInsertAdvancedQuery } from '../src/hooks/after-insert';
 import { advancedSearch } from '../src/index';
 
