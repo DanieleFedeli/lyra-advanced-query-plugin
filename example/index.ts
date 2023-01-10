@@ -1,10 +1,10 @@
-import lyra, { insertWithHooks } from '@lyrasearch/lyra';
+import { create, insertWithHooks } from '@lyrasearch/lyra';
 
 import { afterInsertAdvancedQuery } from '../src/hooks/after-insert';
 import { advancedSearch } from '../src/index';
 
 async function init() {
-  const db = lyra.create({
+  const db = create({
     schema: {
       author: 'string',
       alive: 'boolean',
@@ -15,14 +15,18 @@ async function init() {
     },
   });
 
-  await insertWithHooks(db, { author: 'Daniele', alive: true, age: 25 });
+  const { id: danieleID } = await insertWithHooks(db, {
+    author: 'Daniele',
+    alive: true,
+    age: 25,
+  });
   await insertWithHooks(db, { author: 'Daniele', alive: false, age: 25 });
 
+  // Retrieve only the first document.
   const result = advancedSearch(db, {
     where: { alive: true },
     term: 'Daniele',
   });
-  // Retrieve only the first document.
 }
 
 init();

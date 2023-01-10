@@ -1,6 +1,7 @@
 import { PropertiesSchema, Lyra } from '@lyrasearch/lyra';
-import { allowedNumericComparison } from 'src/search';
-import { NumberComparison, WhereParams } from 'src/types';
+
+import { allowedNumericComparison } from '../search';
+import { NumberComparison, WhereParams } from '../types';
 
 export function getUsedIndexes<S extends PropertiesSchema>(
   lyra: Lyra<S>,
