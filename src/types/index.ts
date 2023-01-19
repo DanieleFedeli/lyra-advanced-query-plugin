@@ -1,4 +1,5 @@
-import { PropertiesSchema, SearchParams } from "@lyrasearch/lyra";
+import { SearchParams } from "@lyrasearch/lyra/dist/methods/search";
+import { PropertiesSchema } from "@lyrasearch/lyra/dist/types";
 import { allowedNumericComparison } from "..";
 import { SortedQueue } from "../sorted-queue";
 

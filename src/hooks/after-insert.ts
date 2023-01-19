@@ -1,5 +1,4 @@
-import { PropertiesSchema, Lyra } from "@lyrasearch/lyra";
-import { ResolveSchema } from "@lyrasearch/lyra/dist/esm/src/types";
+import { Lyra, PropertiesSchema } from "@lyrasearch/lyra/dist/types";
 import { booleanIndex, numericIndex } from "src";
 import { SortedQueue, QueueNode } from "src/sorted-queue";
 import { binarySearch } from "src/utils/binary-search";

@@ -1,4 +1,5 @@
-import { Lyra, PropertiesSchema, search } from "@lyrasearch/lyra";
+import { search } from "@lyrasearch/lyra";
+import { Lyra, PropertiesSchema } from "@lyrasearch/lyra/dist/types";
 import { QueueNode } from "./sorted-queue";
 import { AdvancedParams, BooleanIndex, NumberComparison, NumericIndex, WhereParams } from "./types";
 import { binarySearch } from "./utils/binary-search";
@@ -26,7 +27,8 @@ export function advancedSearch<S extends PropertiesSchema>(lyra: Lyra<S>, params
     }
 
   }
-
+  
+  // This should be inside an hook.
   for (const virtualIndex of indexes.usedNumericIndex) {
     const rawIndex = virtualIndex.split('.');
     const numericKey = rawIndex.slice(0, -2).join(".");
