@@ -4,7 +4,7 @@ import { afterInsertAdvancedQuery } from '../src/hooks/after-insert';
 import { advancedSearch } from '../src/index';
 
 async function init() {
-  const db = create({
+  const db = await create({
     schema: {
       author: 'string',
       alive: 'boolean',
@@ -23,7 +23,7 @@ async function init() {
   await insertWithHooks(db, { author: 'Daniele', alive: false, age: 25 });
 
   // Retrieve only the first document.
-  const result = advancedSearch(db, {
+  const result = await advancedSearch(db, {
     where: { alive: true },
     term: 'Daniele',
   });

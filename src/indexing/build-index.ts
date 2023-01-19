@@ -1,12 +1,12 @@
-import { PropertiesSchema } from '@lyrasearch/lyra';
-import { ResolveSchema } from '@lyrasearch/lyra/dist/esm/src/types';
+
+import { PropertiesSchema, ResolveSchema } from '@lyrasearch/lyra/dist/types';
 
 import { SortedQueue, QueueNode } from '../sorted-queue';
 import { binarySearch } from '../utils/binary-search';
 
 import { booleanIndex, numericIndex } from '.';
 
-export function indexDocument<S extends PropertiesSchema>(
+export function indexDocument<S extends PropertiesSchema >(
   docId: string,
   doc: ResolveSchema<S>,
   prefix = ''

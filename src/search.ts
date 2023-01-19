@@ -1,4 +1,5 @@
-import { PropertiesSchema, Lyra, search } from '@lyrasearch/lyra';
+import { search } from '@lyrasearch/lyra';
+import { Lyra, PropertiesSchema } from '@lyrasearch/lyra/dist/types';
 
 import { booleanIndex, numericIndex, getUsedIndexes } from './indexing';
 import { QueueNode } from './sorted-queue';
@@ -8,7 +9,7 @@ import { setIntersection } from './utils/set';
 
 export const allowedNumericComparison = ['>=', '>', '=', '<', '<='] as const;
 
-export function advancedSearch<S extends PropertiesSchema>(
+export async function advancedSearch<S extends PropertiesSchema>(
   lyra: Lyra<S>,
   params: AdvancedParams<S>
 ) {
@@ -56,7 +57,7 @@ export function advancedSearch<S extends PropertiesSchema>(
   }
 
   const retrievedDoc = setIntersection(retrievedBoolean, retrievedNumeric);
-  const finalResult: ReturnType<typeof search> = {
+  const finalResult: Awaited<ReturnType<typeof search>> = {
     elapsed: BigInt(0),
     hits: [],
     // Find a way to retrieve the exact number of count
@@ -67,7 +68,7 @@ export function advancedSearch<S extends PropertiesSchema>(
   params.limit ??= 10;
 
   while (finalResult.hits.length < params.limit) {
-    const result = search(lyra, params);
+    const result = await search(lyra, params);
 
     // No more documents to retrieve
     if (!result.hits.length) break;

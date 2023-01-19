@@ -1,7 +1,7 @@
 import { SearchParams } from "@lyrasearch/lyra/dist/methods/search";
 import { PropertiesSchema } from "@lyrasearch/lyra/dist/types";
+import { allowedNumericComparison } from "src/search";
 
-import { allowedNumericComparison } from "..";
 import { SortedQueue } from "../sorted-queue";
 
 export type NumericIndex = Map<string, SortedQueue<Set<string>>>;
