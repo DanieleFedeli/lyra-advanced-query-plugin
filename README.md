@@ -15,7 +15,7 @@ import {
   afterInstertAdvancedQuery,
 } from 'lyra-advanced-query-plugin';
 
-const db = lyra.create({
+const db = await lyra.create({
   schema: {
     author: 'string',
     alive: 'boolean',
@@ -32,7 +32,7 @@ await insertWithHooks(lyrs, {
   age: 25,
 });
 
-const result = advancedSearch(lyra, {
+const result = await advancedSearch(lyra, {
   where: { alive: true, age: { '=': 25 } },
   term: 'Daniele',
 });
