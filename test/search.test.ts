@@ -4,7 +4,7 @@ import { afterInsertAdvancedQuery } from 'src/hooks/after-insert';
 import t from 'tap';
 
 t.test('Advanced search with right term', async (t) => {
-  const lyra = create({
+  const lyra = await create({
     schema: {
       author: 'string',
       alive: 'boolean',
@@ -31,7 +31,7 @@ t.test('Advanced search with right term', async (t) => {
     booksSold: 1234,
   });
 
-  const resultsAlive = advancedSearch(lyra, {
+  const resultsAlive = await advancedSearch(lyra, {
     where: { alive: true },
     term: 'alive',
   });
@@ -39,7 +39,7 @@ t.test('Advanced search with right term', async (t) => {
   t.same(resultsAlive.hits.length, 2);
   t.same(resultsAlive.hits[0].id, idAlive1.id);
 
-  const resultsDead = advancedSearch(lyra, {
+  const resultsDead = await advancedSearch(lyra, {
     where: { alive: false },
     term: 'Dead',
   });
@@ -52,7 +52,7 @@ t.test('Advanced search with right term', async (t) => {
 t.test(
   'Advanced search with right term but where query produces 1 results',
   async (t) => {
-    const lyra = create({
+    const lyra = await create({
       schema: {
         author: 'string',
         alive: 'boolean',
@@ -74,7 +74,7 @@ t.test(
       booksSold: 123,
     });
 
-    const resultsAlive = advancedSearch(lyra, {
+    const resultsAlive = await advancedSearch(lyra, {
       where: { alive: true },
       term: 'Alive',
     });
@@ -86,7 +86,7 @@ t.test(
 );
 
 t.test('Advanced search with numbers', async (t) => {
-  const lyra = create({
+  const lyra = await create({
     schema: {
       author: 'string',
       alive: 'boolean',
@@ -104,35 +104,35 @@ t.test('Advanced search with numbers', async (t) => {
   });
   await insertWithHooks(lyra, { author: 'Alive', alive: true, booksSold: 123 });
 
-  const resultsAlive = advancedSearch(lyra, {
+  const resultsAlive = await advancedSearch(lyra, {
     where: { booksSold: { '=': 1233 } },
     term: 'Alive',
   });
 
   t.same(resultsAlive.hits.length, 1);
 
-  const resultAliveLE = advancedSearch(lyra, {
+  const resultAliveLE = await advancedSearch(lyra, {
     where: { booksSold: { '<=': 1233 } },
     term: 'Alive',
   });
 
   t.same(resultAliveLE.hits.length, 2);
 
-  const resultAliveL = advancedSearch(lyra, {
+  const resultAliveL = await advancedSearch(lyra, {
     where: { booksSold: { '<': 1233 } },
     term: 'Alive',
   });
 
   t.same(resultAliveL.hits.length, 1);
 
-  const resultAliveG = advancedSearch(lyra, {
+  const resultAliveG = await advancedSearch(lyra, {
     where: { booksSold: { '>': 1233 } },
     term: 'Alive',
   });
 
   t.same(resultAliveG.hits.length, 0);
 
-  const resultAliveGT = advancedSearch(lyra, {
+  const resultAliveGT = await advancedSearch(lyra, {
     where: { booksSold: { '>=': 1233 } },
     term: 'Alive',
   });
@@ -142,7 +142,7 @@ t.test('Advanced search with numbers', async (t) => {
 });
 
 t.test('Search with nested properties', async (t) => {
-  const lyra = create({
+  const lyra = await create({
     schema: {
       author: {
         name: 'string',
@@ -165,7 +165,7 @@ t.test('Search with nested properties', async (t) => {
     booksSold: 123,
   });
 
-  const resultAlive = advancedSearch(lyra, {
+  const resultAlive = await advancedSearch(lyra, {
     term: 'Daniele',
     where: { author: { alive: true } },
   });
