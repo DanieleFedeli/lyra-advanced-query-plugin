@@ -5,7 +5,7 @@ import t from 'tap';
 
 t.test('After insert hook', (t) => {
   t.test('Should index the new inserted documents', async (t) => {
-    const lyra = create({
+    const lyra = await create({
       schema: {
         author: 'string',
         booksSold: 'number',
@@ -31,7 +31,7 @@ t.test('After insert hook', (t) => {
   });
 
   t.test('Should index nested prop', async (t) => {
-    const lyra = create({
+    const lyra = await create({
       schema: {
         author: {
           name: 'string',

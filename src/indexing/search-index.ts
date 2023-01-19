@@ -1,9 +1,9 @@
-import { PropertiesSchema, Lyra } from '@lyrasearch/lyra';
+import { Lyra, PropertiesSchema } from '@lyrasearch/lyra/dist/types';
 
 import { allowedNumericComparison } from '../search';
 import { NumberComparison, WhereParams } from '../types';
 
-export function getUsedIndexes<S extends PropertiesSchema>(
+export function getUsedIndexes<S extends PropertiesSchema >(
   lyra: Lyra<S>,
   schema: S,
   where: WhereParams<S>,

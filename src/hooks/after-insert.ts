@@ -1,4 +1,4 @@
-import { PropertiesSchema, Lyra } from '@lyrasearch/lyra';
+import { Lyra, PropertiesSchema } from "@lyrasearch/lyra/dist/types";
 
 import { indexDocument } from '../indexing';
 

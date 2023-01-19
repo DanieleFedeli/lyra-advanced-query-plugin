@@ -1,7 +1,8 @@
-import { PropertiesSchema, SearchParams } from '@lyrasearch/lyra';
+import { SearchParams } from "@lyrasearch/lyra/dist/methods/search";
+import { PropertiesSchema } from "@lyrasearch/lyra/dist/types";
+import { allowedNumericComparison } from "src/search";
 
-import { allowedNumericComparison } from '../search';
-import { SortedQueue } from '../sorted-queue';
+import { SortedQueue } from "../sorted-queue";
 
 export type NumericIndex = Map<string, SortedQueue<Set<string>>>;
 export type BooleanIndex = Map<string, Set<string>>;
