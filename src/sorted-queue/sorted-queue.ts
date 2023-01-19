@@ -1,4 +1,6 @@
-import { QueueNode } from "./node";
+import { binarySearch } from '../utils/binary-search';
+
+import { QueueNode } from './node';
 
 class SortedQueue<TPaylod> {
   public queue: QueueNode<TPaylod>[];
@@ -29,6 +31,13 @@ class SortedQueue<TPaylod> {
     }
 
     return this.queue.push(node);
+  }
+
+  search(priority: number): number {
+    if (priority === this.maxPriority) return this.queue.length - 1;
+    if (priority === this.minPriority) return 0;
+
+    return binarySearch(this.queue, (element) => element.priority - priority);
   }
 }
 
